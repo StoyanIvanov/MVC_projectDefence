@@ -1,0 +1,92 @@
+﻿@model ElectroLED.Models.ViewModels.GroupViewModel
+@{
+    ViewBag.Title = "Select";
+}
+
+@RenderPage("~/Views/Shared/_Carousel.cshtml")
+<!-- Page Content -->
+
+<div id="content">
+    <div class="col-md-12">
+
+        <div class="row">
+            <h2 class="text-center">@Model.Name</h2>
+        </div>
+        
+        <div class="row group">
+            @{
+
+                if (Model != null)
+                {
+
+                    foreach (var category in Model.Categories)
+                    {
+                        <div class="col-md-4 col-sm-6">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front">
+                                            <a href='@Url.Action("Products", "Category", new { categoryId = category.Id })'>
+                                                @if (category.Image != null)
+                                                {
+                                                    <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/@category.Image" alt="@category.Name">
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/notfound.png" alt="@category.Name">
+                                                }
+                                            </a>
+                                        </div>
+                                        <div class="back">
+                                            <a href='@Url.Action("Products", "Category", new { categoryId = category.Id })'>
+                                                @if (category.Image != null)
+                                                {
+                                                    <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/@category.Image" alt="@category.Name">
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/notfound.png" alt="@category.Name">
+                                                }
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href='@Url.Action("Products", "Category", new { categoryId = category.Id })' class="invisible">
+                                    @if (category.Image != null)
+                                    {
+                                        <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/@category.Image" alt="@category.Name">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-responsive recomendedImage" src="/Content/Images/ProductImages/notfound.png" alt="@category.Name">
+                                    }
+                                </a>
+                                <div class="text">
+                                    <h3>
+                                        <a href='@Url.Action("Products", "Category", new { categoryId = category.Id })'>@category.Name</a>
+                                    </h3>
+                                    <p class="buttons">
+                                        <a href='@Url.Action("Products", "Category", new { categoryId = category.Id })' class="btn btn-default">View Products</a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                    }
+                }
+            
+            }
+            </div>
+        </div>
+
+</div>
+
+<!-- /.container -->
+
+@section Script{
+
+    @Scripts.Render("~/Scripts/application.api.js")
+
+}

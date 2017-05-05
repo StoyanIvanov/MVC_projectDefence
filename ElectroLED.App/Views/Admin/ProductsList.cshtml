@@ -1,0 +1,95 @@
+﻿@model ICollection<ElectroLED.Models.ViewModels.ProductAdminViewModel>
+
+@{
+    ViewBag.Title = "Products List";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="container">
+    <div class="row table-hover">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="table">
+                <table class="table-hover">
+                    <tr>
+                        <th>
+                            Product Name
+                        </th>
+                        <th>
+                            Category Name
+                        </th>
+                        <th>
+                            Online From
+                        </th>
+                        <th>
+                           SKU ID
+                        </th>
+                        <th>
+                            Tag
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OnlineFromDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SkuId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tag)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @if (ViewBag.IsAdmin)
+                                {
+                                    <a id ="delete" href="#">Delete</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="navbar-collapse">
+                <div class="row navbar">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        @if (ViewBag.pages > 0)
+                        {
+                            if (ViewBag.page > 1)
+                            {
+                                int previousPgae = (int)ViewBag.page - 1;
+                                <div class="btn btn-default"><a href="@previousPgae">Previous</a></div>
+                            }
+                            else
+                            {
+                                <div class="btn btn-default">Previous</div>
+                            }
+
+                            if (ViewBag.page < ViewBag.pages)
+                            {
+                                int nextPage = (int)ViewBag.page + 1;
+                                <div class="btn btn-default"><a href="@nextPage">Next</a></div>
+                            }
+                            else
+                            {
+                                <div class="btn btn-default">Next</div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

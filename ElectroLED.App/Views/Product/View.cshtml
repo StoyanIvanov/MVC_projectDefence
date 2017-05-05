@@ -1,0 +1,104 @@
+﻿@model ElectroLED.Models.ViewModels.ProductDetailViewModel
+@{
+    ViewBag.Title = "View";
+}
+
+<!-- *** NAVBAR END *** -->
+
+<div id="all">
+
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-1">
+
+            </div>
+
+            <div class="col-md-10">
+
+                <div class="row" id="productMain" productId="@Model.Id">
+                    <div class="col-sm-6">
+                        <div id="mainImage">
+                            @{
+                                if (Model.Images.Count > 0)
+                                {
+                                    @:<img src="/Content/Images/ProductImages/@Model.Images.FirstOrDefault(image => image.isDefault == true).File" alt="" class="img-responsive">
+                                }
+                                else
+                                {
+                                    @:<img src="/Content/Images/ProductImages/notfound.png" alt="" class="img-responsive">
+                                }
+                            }
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="box">
+                            <h2 class="text-center">@Model.Name</h2>
+                            @if (Model.ProductParameters.Count > 0)
+                            {
+                                <p class="goToDescription">
+                                    <a href="#details" class="scroll-to">Scroll to product details</a>
+                                </p>
+                            }
+                            <p class="price">@Model.Price</p>
+
+                        </div>
+
+                        <div class="row" id="thumbs">
+                            @foreach (var image in Model.Images)
+                            {
+                                <div class="col-xs-4">
+                                    <a href="/Content/Images/ProductImages/@image.File" class="thumb">
+                                        <img src="/Content/Images/ProductImages/@image.File" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.ProductParameters.Count > 0)
+                {
+                    <div class="box" id="details">
+                        <table class="table table-hover">
+                            <tbody>
+                                @foreach (var detail in Model.ProductParameters)
+                                {
+                                    <tr>
+                                        <td>@detail.Name</td>
+                                        <td>@detail.Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+                <div class="row same-height-row" id="recomended">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="text-center">
+                            <h3>You may also like</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-md-9 -->
+
+            <div class="col-md-1">
+
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+</div>
+<!-- /#all -->
+
+@section Script{
+
+    @Scripts.Render("~/Scripts/application.api.js")
+    @Scripts.Render("~/Scripts/product.js")
+
+}

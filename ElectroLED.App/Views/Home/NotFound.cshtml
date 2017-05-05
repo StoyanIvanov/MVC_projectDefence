@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "NotFound";
+}
+
+@RenderPage("~/Views/Shared/_Carousel.cshtml")
+
+
+<div id="content">
+    <div class="col-md-12">
+
+        <div class="row">
+            <h1 class="text-center text-success">@ViewBag.message</h1>
+        </div>
+
+    </div>
+</div>
+
+@section Script{
+
+    @Scripts.Render("/Scripts/application.api.js")
+
+}
+
+
+
+

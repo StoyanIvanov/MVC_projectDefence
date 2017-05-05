@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+}
+
+@Scripts.Render("/Scripts/productsgrid.api.js")
+<div id="all">
+
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-12">
+
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Back</a>
+                    </li>
+                    <li category="@ViewBag.categoryId">@ViewBag.categoryName</li>
+                </ul>
+
+                <div class="box info-bar">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 products-showing">
+                            Showing 
+                            @{
+                                if (ViewBag.productsCount > ViewBag.productsPerPage)
+                                {
+                                    @:<strong>@ViewBag.productsPerPage</strong> of <strong>@ViewBag.productsCount</strong>
+                                }
+                                else
+                                {
+                                    @:<strong>@ViewBag.productsCount</strong> of <strong>@ViewBag.productsCount</strong>
+                                }
+                            }
+                            products
+                            
+                        </div>
+
+                        <div class="col-sm-12 col-md-8  products-number-sort">
+                            <div class="row">
+                                <form class="form-inline">
+                                    <div class="col-md-6 col-sm-6">
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="products-sort-by">
+                                            <strong>Sort by</strong>
+                                            <select id="sortingRules" name="sort-by" class="form-control" onchange="changeSortingRule()">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div id="container">
+                
+            </div>
+                <div class="pages">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active" page="1">
+                            <a href="#">1</a>
+                        </li>
+                        @{
+                            int pages = (int)ViewBag.pages;
+                            for (int i = 2; i < pages; i++)
+                            {
+                                @:<li page="@i">
+                                    @:<a href="#">@i</a>
+                                @:</li>
+                            }
+                        }
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.col-md-9 -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+</div>
+@section Script{
+
+    @Scripts.Render("/Scripts/application.api.js")
+
+}
+
+

@@ -1,0 +1,12 @@
+/** Your theme modifications here **/
+.recomendedImage {
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+}
+
+.gridImage {
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
